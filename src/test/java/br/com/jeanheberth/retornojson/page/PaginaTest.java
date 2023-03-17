@@ -2,17 +2,12 @@ package br.com.jeanheberth.retornojson.page;
 
 import br.com.jeanheberth.retornojson.constantes.Constantes;
 import br.com.jeanheberth.retornojson.utils.base.BaseTeste;
-import com.google.gson.Gson;
 import io.restassured.http.ContentType;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static io.restassured.RestAssured.*;
+import org.springframework.http.MediaType;
+import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 
 class PaginaTest extends BaseTeste {
 
@@ -37,13 +32,24 @@ class PaginaTest extends BaseTeste {
                 .contentType(ContentType.JSON)
                 .log().all()
                 .when()
-                .get(Constantes.ID_USERS +1)
+                .get(Constantes.ID_USERS + 1)
                 .then()
-             .statusCode(200)
-             .log().all()
-             .body(matchesJsonSchemaInClasspath("schemas/testeComUmDado.json")
-                )
-            ;
-
+                .statusCode(200)
+                .log().all()
+                .body(matchesJsonSchemaInClasspath("schemas/testeComUmDado.json"));
     }
+
+    @Test
+    void consultarJsonComVariosDados() {
+        given()
+                .spec(urlBase)
+                .contentType(ContentType.JSON)
+                .when()
+                .get(Constantes.ALL_USERS)
+                .andReturn()
+                .then()
+                .body(matchesJsonSchemaInClasspath("schemas/testeComVariosDados.json"))
+                .extract();
+    }
+
 }

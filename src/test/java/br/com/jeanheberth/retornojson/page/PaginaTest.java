@@ -20,7 +20,7 @@ class PaginaTest extends BaseTeste {
                 .get(Constantes.olaMundo)
                 .then()
                 .statusCode(200)
-                .body(containsString("Ola Mundo!"));
+                .body(containsString("Ola Mundo!fadfsafdfaf"));
 
     }
 

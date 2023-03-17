@@ -1,14 +1,13 @@
 package br.com.jeanheberth.retornojson.utils.dto;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 public class DepartamentoDTO {
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
+
     @Data
-    @NoArgsConstructor
+    @EqualsAndHashCode
     public class DepartamentoResponseDto {
 
         private Long id;

@@ -13,4 +13,5 @@ public class BaseTeste {
     protected static RequestSpecification urlBase = new RequestSpecBuilder()
             .setBaseUri(url)
             .build();
+
 }
